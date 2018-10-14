@@ -54,7 +54,7 @@ public class Cadastrar extends HttpServlet {
                        
             String id = request.getParameter("id");
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c =  DriverManager.getConnection("jdbc:mysql://localhost/contabancaria","root","xamp,xamp");
+            Connection c =  DriverManager.getConnection("jdbc:mysql://localhost/contabancaria","root","123456");
             PreparedStatement  p =  c.prepareStatement("delete from contacorrente where id = ? ");
             p.setInt(1,  Integer.parseInt(id));
             p.execute() ;
@@ -81,17 +81,19 @@ public class Cadastrar extends HttpServlet {
             throws ServletException, IOException {
         try {
                        
-            String Login = request.getParameter("Login");
-            String Cpf = request.getParameter("Cpf");
-            String RG = request.getParameter("RG");
+            String Nome = request.getParameter("nome");
+            String Cpf = request.getParameter("cpf");
+            String RG = request.getParameter("rg");
+            String Data = request.getParameter("data");
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c =  DriverManager.getConnection("jdbc:mysql://localhost/contabancaria","root","xamp,xamp");
-            PreparedStatement  p =  c.prepareStatement("insert into conta (Login,Cpf,RG) values (?,?,?)");
-            p.setString(1, Login );
+            Connection c =  DriverManager.getConnection("jdbc:mysql://localhost/contabancaria","root","");
+            PreparedStatement  p =  c.prepareStatement("insert into conta (nome,cpf,rg,data) values (?,?,?,?)");
+            p.setString(1, Nome);
             p.setString(2, Cpf);
             p.setString(3, RG);
+            p.setString(4, Data);
             p.execute() ;
-            response.sendRedirect("newhtml.html");
+            response.sendRedirect("index.html");
             
             
         } catch (SQLException ex) {
